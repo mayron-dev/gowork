@@ -1,0 +1,16 @@
+services:
+  redis:
+    image: redis:7.2.7-alpine3.21
+    container_name: redis
+    restart: unless-stopped
+    environment:
+      - REDIS_PASSWORD=redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: ["redis-server", "--appendonly", "yes"]
+
+volumes:
+  redis_data:
+    driver: local
